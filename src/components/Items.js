@@ -1,11 +1,23 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import Item from './Item';
 
-const Items = ({ items, listId }) => {
+function areEqual(prevProps, nextProps) {
+  /*
+  return true if passing nextProps to render would return
+  the same result as passing prevProps to render,
+  otherwise return false
+  */
+  return prevProps.line === nextProps.line;
+}
+
+const ItemMemo = React.memo(Item, areEqual);
+
+const Items = ({ items, listId, handleDeleteItem, handleOpenEditItem }) => {
   return (
     <Droppable 
-        droppableId={listId}
-        type="ITEM"
+      droppableId={listId}
+      type="ITEM"
     >
       {(provided) => (
         <div
@@ -14,27 +26,14 @@ const Items = ({ items, listId }) => {
           className="items"
         >
           {items.map((item, index) => (
-            <Draggable key={item.id} draggableId={item.id} index={index}>
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                  className="item"
-                >
-                  <div
-                    isDragging={snapshot.isDragging}
-                  >
-                    <div
-                      className="item-content"
-                      isDragging={snapshot.isDragging}
-                      {...provided.dragHandleProps}
-                      aria-label={item.content}
-                    >{item.content}</div>
-                  </div>
-                </div>
-              )}
-            </Draggable>
+            <ItemMemo 
+              key={item.id} 
+              item={item} 
+              index={index} 
+              listId={listId} 
+              handleDeleteItem={handleDeleteItem}
+              handleOpenEditItem={handleOpenEditItem}
+            />
           ))}
           {provided.placeholder}
         </div>

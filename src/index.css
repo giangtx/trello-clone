@@ -17,23 +17,131 @@ code {
 }
 .column {
   width: 300px;
+  min-width: 300px;
   background: #f0f0f0;
 }
 .column-title {
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 10px;
-  padding: 5px 0;
+  padding: 10px;
   background-color: #c8c8c8;
+  display: flex;
+  justify-content: space-between;
+
 }
 .items {
   padding: 10px;
   padding-top: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  /* gap: 8px; */
 }
 .item-content {
   background: white;
   padding: 10px;
+  margin: 5px 0;
+}
+
+.add-column-title {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 0;
+  background-color: #c8c8c8;
+  cursor: pointer;
+  
+}
+.add-column {
+  width: 300px;
+  min-width: 300px;
+  background: #f0f0f0;
+  height: fit-content;
+}
+.add-column-input input{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #c8c8c8;
+  outline: none;
+}
+.broad-wrp {
+  width: 100%;
+  overflow-x: scroll;
+}
+.add-column-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.add-item {
+  padding: 0 10px;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+.add-item-title {
+  padding: 10px;
+  background: #f0f0f0;
+  text-align: start;
+}
+.add-item-input {
+  display: flex;
+}
+.add-item-input input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #c8c8c8;
+  outline: none;
+}
+.add-item-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  padding-bottom: 0;
+}
+
+.add-item-btn {
+  padding: 10px;
+  background: #c8c8c8;
+  cursor: pointer;
+}
+.icon svg {
+  width: 20px;
+  height: 20px;
+}
+.item-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-item-wrp {
+  padding: 10px;
+}
+
+.edit-item-wrp {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-input input{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #c8c8c8;
+  outline: none;
+}
+
+.edit-input select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #c8c8c8;
+  outline: none;
+}
+.item-content[data-status="inprogress"] {
+  background: #4096ff;
+}
+.item-content[data-status="done"] {
+  background: #61dafb;
 }
