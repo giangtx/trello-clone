@@ -145,3 +145,16 @@ code {
 .item-content[data-status="done"] {
   background: #61dafb;
 }
+.droppable {
+  cursor: grab;
+}
+.draggable {
+  transition: none;
+}
+.dragging {
+  position: fixed;
+  z-index: 1000;
+}
+.dragging-over {
+  transition: transform 0.2s ease;
+}
