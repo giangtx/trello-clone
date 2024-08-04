@@ -15,7 +15,7 @@ const Broads = () => {
   const fetchBroads = async () => {
     const response = await getBroads();
     console.log(response)
-    setBroads(response.broads);
+    setBroads(response.broads || []);
   }
 
   

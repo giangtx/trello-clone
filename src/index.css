@@ -378,3 +378,97 @@ code {
 .page {
   padding-top: 72px;
 }
+.header{
+  color: black;
+}
+.dark .header{
+  color: white;
+}
+.header.header-home{
+  padding: 1.5rem;
+  max-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-size: 18px;
+}
+.header-home .header-logo{
+  font-size: 30px;
+}
+
+.home-page {
+  background-image: linear-gradient(#eae6ff, #FFFFFF);
+  min-height: 100vh;
+}
+.header-sign-up {
+  color: white;
+  background: #38A169;
+  border-radius: 5px;
+}
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  padding-top: 10%;
+}
+.home-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home-item h1 {
+  font-size: 50px;
+  font-weight: 700;
+}
+.home-item p {
+  font-size: 20px;
+  font-weight: 500;
+}
+.login-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.login-logo {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.login-container {
+  max-width: 330px;
+  padding: 25px 40px;
+  border: 1px solid #E2E8F0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+  text-align: center;
+}
+.login-title {
+  text-align: center;
+  font-size: 20px;
+}
+.login-input {
+  margin-top: 20px;
+}
+.login-input input{
+  border-radius: 0.3rem;
+  border: 1px solid #E2E8F0;
+  height: 40px;
+  padding: 15px;
+}
+.login-btn button{
+  margin: 20px 0;
+  background: #38A169;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+}
+.login-error {
+  color: red;
+  margin-bottom: 10px;
+}
