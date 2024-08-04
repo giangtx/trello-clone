@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DragDropContext } from './DragDropContext';
 
-const Draggable = ({ children, draggableId, index, type, dropableId }) => {
+const Draggable = ({ children, draggableId, index, type, dropableId, dragTitle }) => {
   const ref = React.useRef(null);
 
-  const { onDragEnd } = React.useContext(DragDropContext);
+  // const { onDragEnd } = React.useContext(DragDropContext);
   const [isDragging, setIsDragging] = React.useState(false);
-  const [target, setTarget] = React.useState(null);
+
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const drag =ref.current.querySelector('.drag-item');
+    if (drag) {
+      drag.addEventListener('mousedown', handleDragStart);
+
+      let addItemsTitle = drag.querySelectorAll('.add-item, .edit-item');
+      addItemsTitle.forEach((title) => {
+        title.addEventListener('mousedown', (e) => {
+          e.stopPropagation();
+        });
+      });
+    }
+
+    return () => {
+      if (drag) {
+        drag.removeEventListener('mousedown', handleDragStart);
+      }
+    }
+  }, []);
 
   const handleDragStart = (e) => {
     e.preventDefault();
@@ -33,6 +54,7 @@ const Draggable = ({ children, draggableId, index, type, dropableId }) => {
 
     holder.style.width = dragItemWrp.offsetWidth + 'px';
     holder.style.height = holder.offsetHeight + 'px';
+    
     holder.style.left = e.clientX - holder.offsetWidth / 2 + 'px';
     holder.style.top = e.clientY - holder.offsetHeight / 2 + 'px';
 
@@ -64,8 +86,20 @@ const Draggable = ({ children, draggableId, index, type, dropableId }) => {
       }
   
       let targetDropable = target.closest('.droppable');
+      
       if (targetDropable && targetDropable.getAttribute('data-type') == type) {
         if (targetDropable && targetDropable.getAttribute('data-droppable-id') != dropableId) {
+          const allDropable = document.querySelectorAll('.droppable');
+          allDropable.forEach((dr) => {
+            if (dr.type == type) {
+              if (dr.getAttribute('data-droppable-id') != targetDropable.getAttribute('data-droppable-id') && dr.getAttribute('data-droppable-id') != dropableId) {
+                console.log(dr)
+                dr.querySelectorAll('.fake-item-wrp').forEach((item) => {
+                  item.remove();
+                });
+              }
+            }
+          });
           const checkFakeItem = targetDropable.querySelector('.fake-item-wrp');
           if (!checkFakeItem) {
             fakeItemWrp.innerHTML = '';
@@ -275,7 +309,11 @@ const Draggable = ({ children, draggableId, index, type, dropableId }) => {
         }
       }
 
-      onDragEnd(result);
+      const event = new CustomEvent('dragend', {
+        detail: result
+      });
+      window.dispatchEvent(event);
+      // onDragEnd(result);
       setIsDragging(false);
       document.onmousemove = null;
       document.onmouseup = null;
@@ -290,10 +328,9 @@ const Draggable = ({ children, draggableId, index, type, dropableId }) => {
       className='draggable'
     >
       <div
-        className='drag-item'
+        className={`${dragTitle ? '' : 'drag-item'}`}
         data-draggable-id={draggableId}
         data-index={index}
-        onMouseDown={handleDragStart}
       >
         {children}
       </div>

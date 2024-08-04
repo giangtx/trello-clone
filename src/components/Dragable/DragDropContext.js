@@ -7,7 +7,7 @@ const DragDropContextProvider = ({
     onDragStart,
     onDragEnd
 }) => {
-
+    console.log('render')
     return (
         <DragDropContext.Provider value={{
             onDragStart,
